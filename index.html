@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun, Defania Adesti!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            color: #333;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animated Gradient Background yang Hidup */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ff69b4, #ffb6c1, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -3;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Partikel Bintang Berkelap-kelip */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Envelope - Tepat di Tengah */
+        #envelope {
+            position: relative;
+            width: 340px;
+            height: 230px;
+            background: #fff;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #envelope::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 170px solid transparent;
+            border-right: 170px solid transparent;
+            border-bottom: 60px solid #fff;
+        }
+
+        /* Hati sebagai pengganti tulisan */
+        #envelope::after {
+            content: '❤️';
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.15); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.1); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Content */
+        #content {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            height: 100vh;
+            overflow-y: auto;
+            animation: fadeIn 2s ease-in-out;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #ff1493;
+            text-shadow: 2px 2px 10px rgba(255,105,180,0.5);
+            animation: bounceIn 1.2s ease;
+            margin: 20px 0;
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(-60px); }
+            60% { transform: translateY(15px); }
+            100% { transform: translateY(0); }
+        }
+
+        p.greeting {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        /* Slideshow Estetik Polaroid */
+        .slideshow-container {
+            max-width: 650px;
+            margin: 50px auto;
+            position: relative;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides img {
+            max-width: 100%;
+            max-height: 550px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: rotate(-4deg);
+            animation: polaroidFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes polaroidFloat {
+            0% { transform: rotate(-4deg) translateY(0); }
+            50% { transform: rotate(-4deg) translateY(-15px); }
+            100% { transform: rotate(-4deg) translateY(0); }
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,105,180,0.8);
+            color: white;
+            font-size: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .prev { left: -25px; }
+        .next { right: -25px; }
+
+        .prev:hover, .next:hover {
+            background: #ff1493;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dot {
+            height: 13px;
+            width: 13px;
+            margin: 0 6px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: inline-block;
+            transition: 0.4s;
+        }
+
+        .active, .dot:hover {
+            background-color: #ff1493;
+            transform: scale(1.2);
+        }
+
+        /* Wishes */
+        .wishes {
+            font-size: 22px;
+            color: white;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(255,20,147,0.4);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Confetti Canvas */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bintang Berkelap-kelip -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Envelope di Tengah dengan Hati -->
+    <div id="envelope" onclick="openEnvelope()"></div>
+
+    <div id="content">
+        <h1>Selamat Ulang Tahun, Defania Adesti! 🎂✨</h1>
+        <p class="greeting">Hari ini adalah hari spesialmu! Semoga tahun baru usiamu dipenuhi kebahagiaan, cinta, tawa, dan segala mimpi indah menjadi nyata.</p>
+
+        <!-- Slideshow Memori -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="img1.jpg" alt="Memori 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="img2.jpg" alt="Memori 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="img3.jpg" alt="Memori 3">
+            </div>
+            <div class="mySlides fade">
+                <img src="img4.jpg" alt="Memori 4">
+            </div>
+            <div class="mySlides fade">
+                <img src="img5.jpg" alt="Memori 5">
+            </div>
+            <div class="mySlides fade">
+                <img src="img6.jpg" alt="Memori 6">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+        </div>
+
+        <div class="wishes">
+            Harapan di ulang tahun ini:<br>
+            Semoga Defania Adesti selalu sehat, bahagia, sukses dalam segala hal, dan terus bersinar seperti bintang. Diberkahi keajaiban kecil setiap hari, dikelilingi orang-orang yang mencintaimu sepenuh hati. Happy Birthday, cantik! 💖🎈✨
+        </div>
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+    <script>
+        // Bintang Berkelap-kelip
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = star.style.height = Math.random() * 4 + 2 + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function openEnvelope() {
+            document.getElementById('envelope').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            createStars();
+            startConfetti();
+            showSlides(slideIndex);
+        }
+
+        // Slideshow
+        let slideIndex = 1;
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+
+        // Confetti Meriah
+        function startConfetti() {
+            const canvas = document.getElementById('confetti');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#fad0c4', '#ffffff', '#ff9a9e'];
+
+            for (let i = 0; i < 300; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 7 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * 20 - 10,
+                    tiltAngle: 0
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.tiltAngle += 0.1;
+                    p.y += (Math.cos(p.tiltAngle) + 3 + p.r / 2) * 0.4;
+                    p.x += Math.sin(p.tiltAngle) * 0.8;
+                    p.tilt = Math.sin(p.tiltAngle) * 20;
+
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                    ctx.stroke();
+
+                    if (p.y > canvas.height) {
+                        p.y = -20;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
